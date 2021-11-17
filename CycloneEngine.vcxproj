@@ -24,6 +24,8 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="Dependencies\freeglut\binaryies\Windows32\freeglut.dll" />
+    <None Include="Dependencies\freeglut\binaryies\Windows64\freeglut.dll" />
     <None Include="Dependencies\freeglut\bin\Win32\freeglut.dll" />
     <None Include="Dependencies\freeglut\bin\x64\freeglut.dll" />
   </ItemGroup>
@@ -37,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\freeglut\lib\Win32\freeglut.lib" />
+    <Library Include="Dependencies\freeglut\lib\Windows32\freeglut.lib" />
+    <Library Include="Dependencies\freeglut\lib\Windows64\freeglut.lib" />
     <Library Include="Dependencies\freeglut\lib\x64\freeglut.lib" />
     <Library Include="Dependencies\GLFW\lib-vc2019\glfw3.lib" />
   </ItemGroup>
@@ -99,22 +103,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>"$(SolutionDir)Dependencies\freeglut\include";$(IncludePath)</IncludePath>
-    <LibraryPath>"$(SolutionDir)Dependencies\freeglut\lib\$(Platform)";$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freeglut\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>"$(SolutionDir)Dependencies\freeglut\include";$(IncludePath)</IncludePath>
-    <LibraryPath>"$(SolutionDir)Dependencies\freeglut\lib\$(Platform)";$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freeglut\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>"$(SolutionDir)Dependencies\freeglut\include";$(IncludePath)</IncludePath>
-    <LibraryPath>"$(SolutionDir)Dependencies\freeglut\lib\$(Platform)";$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freeglut\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>"$(SolutionDir)Dependencies\freeglut\include";$(IncludePath)</IncludePath>
-    <LibraryPath>"$(SolutionDir)Dependencies\freeglut\lib\$(Platform)";$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freeglut\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
