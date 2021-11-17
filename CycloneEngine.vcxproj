@@ -21,6 +21,29 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="Dependencies\freeglut\bin\Win32\freeglut.dll" />
+    <None Include="Dependencies\freeglut\bin\x64\freeglut.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut.h" />
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut_ext.h" />
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut_std.h" />
+    <ClInclude Include="Dependencies\freeglut\include\GL\glut.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\freeglut\lib\Win32\freeglut.lib" />
+    <Library Include="Dependencies\freeglut\lib\x64\freeglut.lib" />
+    <Library Include="Dependencies\GLFW\lib-vc2019\glfw3.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dependencies\freeglut\Copying.txt" />
+    <Text Include="Dependencies\freeglut\Readme.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

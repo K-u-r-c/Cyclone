@@ -19,4 +19,39 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Dependencies\freeglut\bin\Win32\freeglut.dll" />
+    <None Include="Dependencies\freeglut\bin\x64\freeglut.dll" />
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut_ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\include\GL\freeglut_std.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\freeglut\include\GL\glut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dependencies\GLFW\include\GLFW\glfw3native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\freeglut\lib\Win32\freeglut.lib" />
+    <Library Include="Dependencies\freeglut\lib\x64\freeglut.lib" />
+    <Library Include="Dependencies\GLFW\lib-vc2019\glfw3.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dependencies\freeglut\Readme.txt" />
+    <Text Include="Dependencies\freeglut\Copying.txt" />
+  </ItemGroup>
 </Project>
