@@ -1,4 +1,4 @@
-// g++ src/*.cpp include/*.cpp src/cyclone/*.cpp -Iinclude/ -lglfw -framework GLUT -framework OpenGL
+// g++ src/*.cpp include/*.cpp src/cyclone/*.cpp -Iinclude/ -lglfw -framework GLUT -framework OpenGL -D GL_SILENCE_DEPRECATION
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
