@@ -1,6 +1,12 @@
-#include <GL/glut.h>
+// g++ src/*.cpp include/*.cpp src/cyclone/*.cpp -Iinclude/ -lglfw -framework GLUT -framework OpenGL
 
- // Include the general application structure.
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
+// Include the general application structure.
 #include "app.h"
 
 // Include the timing functions
@@ -43,7 +49,7 @@ void display() {
 // Called when a mouse button is pressed. Delegates to the application.
 void mouse(int button, int state, int x, int y) { app->mouse(button, state, x, y); }
 
-// Called when the display window changes size. 
+// Called when the display window changes size.
 void reshape(int width, int height) { app->resize(width, height); }
 
 // Called when a key is pressed.

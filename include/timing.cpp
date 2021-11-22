@@ -29,9 +29,9 @@ unsigned systemTime() {
 unsigned TimingData::getTime() { return systemTime(); }
 
 unsigned long systemClock() {
-unsigned val;
+    unsigned val;
 #ifdef __aarch64__
-    asm volotile("mrs %0, cntvct_el0" : "=r"(val));
+    asm volatile("mrs %0, cntvct_el0" : "=r"(val));
 #else
     val = __rdtsc();
 #endif
@@ -47,7 +47,7 @@ void initTime() {
 #else
     long long time;
 
-    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time)> 0);
+    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time) > 0);
 
     // Check if we have access to the performance counter at this resolution.
     if (qpcFlag) qpcFrequency = 1000.0 / time;
