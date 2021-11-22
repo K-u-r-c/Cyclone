@@ -1,4 +1,5 @@
 #include <cyclone/random.h>
+#include <limits.h>
 
 #include <cstdlib>
 #include <ctime>
@@ -26,11 +27,19 @@ void Random::seed(unsigned s) {
     p2 = 10;
 }
 
+static inline uint32_t rotl32(uint32_t n, unsigned int c) {
+    const unsigned int mask = (CHAR_BIT * sizeof(n) - 1);  // assumes width is a power of 2.
+
+    // assert ( (c<=mask) &&"rotate by type width or more");
+    c &= mask;
+    return (n << c) | (n >> ((-c) & mask));
+}
+
 unsigned Random::randomBits() {
     unsigned result;
 
     // Rotate the buffer and store it back to itself
-    result = buffer[p1] = _lrotl(buffer[p2], 13) + _lrotl(buffer[p1], 9);
+    result = buffer[p1] = rotl32(buffer[p2], 13) + rotl32(buffer[p1], 9);
 
     // Rotate pointers
     if (--p1 < 0) p1 = 16;
