@@ -1,8 +1,11 @@
 #include "timing.h"
 
 // Includes the high performance timer (c. 4ms).
+#include <chrono>
+#ifdef __aarch64__
+#else
 #include <windows.h>
-#include <mmsystem.h>
+#endif
 
 // Hold internal timing data for the perfomrance counter.
 static bool qpcFlag;
@@ -10,38 +13,49 @@ static double qpcFrequency;
 
 // Internal time and clock access functions
 unsigned systemTime() {
+#ifdef __aarch64__
+    // Don't know how to do the same for this architecture
+#else
+    static long long qpcMillisPerTick;
     if (qpcFlag) {
-        static LONGLONG qpcMillisPerTick;
         QueryPerformanceCounter((LARGE_INTEGER*)&qpcMillisPerTick);
         return (unsigned)(qpcMillisPerTick * qpcFrequency);
     } else {
         return unsigned(timeGetTime());
     }
+#endif
 }
 
 unsigned TimingData::getTime() { return systemTime(); }
 
 unsigned long systemClock() {
-    __asm {
-        rdtsc;
-    }
+unsigned val;
+#ifdef __aarch64__
+    asm volotile("mrs %0, cntvct_el0" : "=r"(val));
+#else
+    val = __rdtsc();
+#endif
+    return val;
 }
 
 unsigned long TimingData::getClock() { return systemClock(); }
 
 // Sets up the timing system and registers the performance timer.
 void initTime() {
-    LONGLONG time;
+#ifdef __aarch64__
+    // Don't know how to do the same for this architecture.
+#else
+    long long time;
 
-    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time) > 0);
+    qpcFlag = (QueryPerformanceFrequency((LARGE_INTEGER*)&time)> 0);
 
-    // Check if we have access to the performance counter at this
-    // resolution.
+    // Check if we have access to the performance counter at this resolution.
     if (qpcFlag) qpcFrequency = 1000.0 / time;
+#endif
 }
 
 // Holds the global frame time that is passed around
-static TimingData* timingData = NULL;
+static TimingData* timingData = nullptr;
 
 // Retrieves the global frame info instance
 TimingData& TimingData::get() { return (TimingData&)*timingData; }
