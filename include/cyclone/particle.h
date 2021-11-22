@@ -41,7 +41,6 @@ public:
 	// called automatically after each integration step.
 	void clearAccumulator();
 
-
 	// Sets the mass of the particle.
 	//
 	// The new mass of the body.This may not be zero. Small masses can produce unstable 

@@ -12,7 +12,7 @@
  * The main demo class definition.
  */
 class BallisticDemo : public Application {
-    enum ShotType { UNUSED = 0, PISTOL, ARTILLERY, FIREBALL, LASER };
+    enum ShotType { UNUSED = 0, PISTOL, ARTILLERY, FIREBALL, LASER, GRANADE };
 
     /**
      * Holds a single ammunition round record.
@@ -46,7 +46,7 @@ class BallisticDemo : public Application {
      * Holds the maximum number of  rounds that can be
      * fired.
      */
-    const static unsigned ammoRounds = 16;
+    const static unsigned ammoRounds = 128;
 
     /** Holds the particle data. */
     AmmoRound ammo[ammoRounds];
@@ -129,6 +129,13 @@ void BallisticDemo::fire() {
             shot->particle.setAcceleration(0.0f, 0.0f, 0.0f);  // No gravity
             shot->particle.setDamping(0.99f);
             break;
+
+        case GRANADE:
+            shot->particle.setMass(20.0f);
+            shot->particle.setVelocity(0.0f, 16.0f, 20.0f);
+            shot->particle.setAcceleration(0.0f, -50.0f, 0.0f);
+            shot->particle.setDamping(0.99f);
+            break;
     }
 
     // Set the data common to all particle types
@@ -188,7 +195,7 @@ void BallisticDemo::display() {
     // Draw some scale lines
     glColor3f(0.75f, 0.75f, 0.75f);
     glBegin(GL_LINES);
-    for (unsigned i = 0; i < 200; i += 10) {
+    for (unsigned i = 0; i < 400; i += 20) {
         glVertex3f(-5.0f, 0.0f, i);
         glVertex3f(5.0f, 0.0f, i);
     }
@@ -203,7 +210,7 @@ void BallisticDemo::display() {
 
     // Render the description
     glColor3f(0.0f, 0.0f, 0.0f);
-    renderText(10.0f, 34.0f, "Click: Fire\n1-4: Select Ammo");
+    renderText(10.0f, 34.0f, "Click: Fire\n1-5: Select Ammo");
 
     // Render the name of the current shot type
     switch (currentShotType) {
@@ -218,6 +225,9 @@ void BallisticDemo::display() {
             break;
         case LASER:
             renderText(10.0f, 10.0f, "Current Ammo: Laser");
+            break;
+        case GRANADE:
+            renderText(10.0f, 10.0f, "Current Ammo: Granade");
             break;
     }
 }
@@ -240,6 +250,9 @@ void BallisticDemo::key(unsigned char key) {
             break;
         case '4':
             currentShotType = LASER;
+            break;
+        case '5':
+            currentShotType = GRANADE;
             break;
     }
 }
