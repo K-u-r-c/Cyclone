@@ -41,7 +41,6 @@ public:
 	// called automatically after each integration step.
 	void clearAccumulator();
 
-
 	// Sets the mass of the particle.
 	//
 	// The new mass of the body.This may not be zero. Small masses can produce unstable 
@@ -72,6 +71,12 @@ public:
 
 	// Sets the velocity of the particle by component
 	void setVelocity(const real x, const real y, const real z);
+
+	// Fills the given vector with the velocity of the particle.
+	void getVelocity(Vector3* velocity) const;
+
+	// Gets the velocity of the particle.
+	Vector3 getVelocity() const;
 
 	// Sets both the damping of the particle.
 	void setDamping(const real damping);

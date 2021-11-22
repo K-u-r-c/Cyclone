@@ -50,6 +50,11 @@ void Particle::setVelocity(const real x, const real y, const real z) {
 	velocity.y = y;
 	velocity.z = z;
 }
+
+void Particle::getVelocity(Vector3* velocity) const { *velocity = Particle::velocity; }
+
+Vector3 Particle::getVelocity() const { return velocity; }
+
 void Particle::setAcceleration(const Vector3& acceleration) { Particle::acceleration = acceleration; }
 
 void Particle::setAcceleration(const real x, const real y, const real z) {

@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="include\app.cpp" />
     <ClCompile Include="include\timing.cpp" />
-    <ClCompile Include="src\ballistic.cpp" />
+    <ClCompile Include="src\cyclone\core.cpp" />
+    <ClCompile Include="src\cyclone\random.cpp" />
+    <ClCompile Include="src\fireworks.cpp" />
     <ClCompile Include="src\cyclone\particle.cpp" />
     <ClCompile Include="src\cyclone\pworld.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -47,6 +49,7 @@
     <ClInclude Include="include\cyclone\particle.h" />
     <ClInclude Include="include\cyclone\precision.h" />
     <ClInclude Include="include\cyclone\pworld.h" />
+    <ClInclude Include="include\cyclone\random.h" />
     <ClInclude Include="include\timing.h" />
     <ClInclude Include="src\double_pendulum.hpp" />
   </ItemGroup>
