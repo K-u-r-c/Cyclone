@@ -23,7 +23,7 @@ Application* app;
 // Creates a window in which to display the scene.
 void createWindow(const char* title) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(1920, 1080);
+    glutInitWindowSize(1800, 800);
     glutInitWindowPosition(0, 0);
     glutCreateWindow(title);
 }
