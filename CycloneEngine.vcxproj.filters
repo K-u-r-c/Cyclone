@@ -39,6 +39,9 @@
     <ClCompile Include="src\cyclone\core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cyclone\pfgen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\freeglut\bin\Win32\freeglut.dll" />
@@ -92,6 +95,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\cyclone\random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cyclone\pfgen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

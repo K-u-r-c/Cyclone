@@ -22,6 +22,7 @@
     <ClCompile Include="include\app.cpp" />
     <ClCompile Include="include\timing.cpp" />
     <ClCompile Include="src\cyclone\core.cpp" />
+    <ClCompile Include="src\cyclone\pfgen.cpp" />
     <ClCompile Include="src\cyclone\random.cpp" />
     <ClCompile Include="src\fireworks.cpp" />
     <ClCompile Include="src\cyclone\particle.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="include\cyclone\core.h" />
     <ClInclude Include="include\cyclone\cyclone.h" />
     <ClInclude Include="include\cyclone\particle.h" />
+    <ClInclude Include="include\cyclone\pfgen.h" />
     <ClInclude Include="include\cyclone\precision.h" />
     <ClInclude Include="include\cyclone\pworld.h" />
     <ClInclude Include="include\cyclone\random.h" />

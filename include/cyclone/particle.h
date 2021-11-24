@@ -41,6 +41,9 @@ public:
 	// called automatically after each integration step.
 	void clearAccumulator();
 
+	// Adds the given force to the particle to be applied at the next iteration only.
+	void addForce(const Vector3& force);
+
 	// Sets the mass of the particle.
 	//
 	// The new mass of the body.This may not be zero. Small masses can produce unstable 
@@ -54,6 +57,16 @@ public:
 	// Gets the current mass of the particle.
 	real getMass() const;
 
+	// Either an integration function, or the calculateInternals function should
+	// be called before trying to get any settings from the particle.
+	void setInverseMass(const real inverseMass);
+
+	// Gets the inverse mass of the particle.
+	real getInverseMass() const;
+
+	// Returns true if the mass of the particle is not-infinite
+	bool hasFiniteMass() const;
+
 	// Fills the given vector with the position of the particle.
 	void getPosition(Vector3* position) const;
 
@@ -62,7 +75,7 @@ public:
 
 	// Sets the position of the particle.
 	void setPosition(const Vector3& position);
-	
+
 	// Sets the position of the particle by component.
 	void setPosition(const real x, const real y, const real z);
 
@@ -80,10 +93,10 @@ public:
 
 	// Sets both the damping of the particle.
 	void setDamping(const real damping);
-	
+
 	// Sets the constant acceleration of the particle.
 	void setAcceleration(const Vector3& acceleration);
-	
+
 	// Sets the constant acceleration of the particle by component.
 	void setAcceleration(const real x, const real y, const real z);
 };
