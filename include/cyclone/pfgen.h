@@ -29,6 +29,23 @@ public:
 	virtual void updateForce(Particle* particle, real duration);
 };
 
+// A formce generator that applies a drag force. One instance can be used
+// for multiple particles.
+class ParticleDrag : public ParticleForceGenerator {
+	// Holds the velocity drag coefficient.
+	real k1;
+
+	// Holds the velocity squared drag coefficient.
+	real k2;
+
+public:
+	// Creates the generator with the given coefficients.
+	ParticleDrag(real k1, real k2);
+
+	// Applies the drag force to the given particle.
+	virtual void updateForce(Particle* particle, real duration);
+};
+
 // Holds all the force generators and the particles that they pply to.
 class ParticleForceRegistry {
 protected:

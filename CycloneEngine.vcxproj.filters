@@ -21,9 +21,6 @@
     <ClCompile Include="src\cyclone\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\fireworks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,6 +37,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\cyclone\pfgen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\demo\balistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\demo\fireworks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\demo\empty_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
