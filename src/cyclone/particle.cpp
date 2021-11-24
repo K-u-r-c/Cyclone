@@ -15,6 +15,8 @@ void Particle::integrate(real duration) {
 	// Work out the acceleration from the force.
 	// (We'll add to this vector when we come to generate forces.)
 	Vector3 resultingAcc = acceleration;
+	resultingAcc.addScaledVector(forceAccum, inverseMass);
+
 
 	// Update linear velocity from the accelerataion.
 	velocity.addScaledVector(resultingAcc, duration);
