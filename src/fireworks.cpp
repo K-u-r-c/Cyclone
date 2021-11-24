@@ -1,16 +1,19 @@
-#include <cyclone/cyclone.h>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
-#include <stdio.h>
+#endif
 
 #include <app.h>
+#include <cyclone/cyclone.h>
+#include <stdio.h>
 #include <timing.h>
 
-static cyclone::Random random;
-
+static cyclone::Random random_cycl;
 
 // Fireworks are particles, with additional data for rendering and evolution.
 class Firework : public cyclone::Particle {
-public:
+   public:
     // < FireworkUpdate
     /** Fireworks have an integer type, used for firework rules. */
     unsigned type;
@@ -46,7 +49,7 @@ public:
  * Firework rules control the length of a firework's fuse and the
  * particles it should evolve into.
  */
- // > FireworkCreate
+// > FireworkCreate
 struct FireworkRule {
     // < FireworkCreate
     /** The type of firework that is managed by this rule. */
@@ -107,7 +110,7 @@ struct FireworkRule {
      * Set all the rule parameters in one go.
      */
     void setParameters(unsigned type, cyclone::real minAge, cyclone::real maxAge, const cyclone::Vector3& minVelocity,
-        const cyclone::Vector3& maxVelocity, cyclone::real damping) {
+                       const cyclone::Vector3& maxVelocity, cyclone::real damping) {
         FireworkRule::type = type;
         FireworkRule::minAge = minAge;
         FireworkRule::maxAge = maxAge;
@@ -124,7 +127,7 @@ struct FireworkRule {
      */
     void create(Firework* firework, const Firework* parent = NULL) const {
         firework->type = type;
-        firework->age = random.randomReal(minAge, maxAge);
+        firework->age = random_cycl.randomReal(minAge, maxAge);
 
         cyclone::Vector3 vel;
         if (parent) {
@@ -133,12 +136,12 @@ struct FireworkRule {
             vel += parent->getVelocity();
         } else {
             cyclone::Vector3 start;
-            int x = (int)random.randomInt(3) - 1;
+            int x = (int)random_cycl.randomInt(3) - 1;
             start.x = 5.0f * cyclone::real(x);
             firework->setPosition(start);
         }
 
-        vel += random.randomVector(minVelocity, maxVelocity);
+        vel += random_cycl.randomVector(minVelocity, maxVelocity);
         firework->setVelocity(vel);
 
         // We use a mass of one in all cases (no point having fireworks
@@ -186,7 +189,7 @@ class FireworksDemo : public Application {
     /** Creates the rules. */
     void initFireworkRules();
 
-public:
+   public:
     /** Creates a new demo object. */
     FireworksDemo();
     ~FireworksDemo();
@@ -225,80 +228,80 @@ void FireworksDemo::initFireworkRules() {
     // Go through the firework types and create their rules.
     rules[0].init(2);
     rules[0].setParameters(1,                             // type
-        0.5f, 1.4f,                    // age range
-        cyclone::Vector3(-5, 25, -5),  // min velocity
-        cyclone::Vector3(5, 28, 5),    // max velocity
-        0.1                            // damping
+                           0.5f, 1.4f,                    // age range
+                           cyclone::Vector3(-5, 25, -5),  // min velocity
+                           cyclone::Vector3(5, 28, 5),    // max velocity
+                           0.1                            // damping
     );
     rules[0].payloads[0].set(3, 5);
     rules[0].payloads[1].set(5, 5);
 
     rules[1].init(1);
     rules[1].setParameters(2,                             // type
-        0.5f, 1.0f,                    // age range
-        cyclone::Vector3(-5, 10, -5),  // min velocity
-        cyclone::Vector3(5, 20, 5),    // max velocity
-        0.8                            // damping
+                           0.5f, 1.0f,                    // age range
+                           cyclone::Vector3(-5, 10, -5),  // min velocity
+                           cyclone::Vector3(5, 20, 5),    // max velocity
+                           0.8                            // damping
     );
     rules[1].payloads[0].set(4, 2);
 
     rules[2].init(0);
     rules[2].setParameters(3,                             // type
-        0.5f, 1.5f,                    // age range
-        cyclone::Vector3(-5, -5, -5),  // min velocity
-        cyclone::Vector3(5, 5, 5),     // max velocity
-        0.1                            // damping
+                           0.5f, 1.5f,                    // age range
+                           cyclone::Vector3(-5, -5, -5),  // min velocity
+                           cyclone::Vector3(5, 5, 5),     // max velocity
+                           0.1                            // damping
     );
     // < FireworkRuleDef
 
     rules[3].init(0);
     rules[3].setParameters(4,                             // type
-        0.25f, 0.5f,                   // age range
-        cyclone::Vector3(-20, 5, -5),  // min velocity
-        cyclone::Vector3(20, 5, 5),    // max velocity
-        0.2                            // damping
+                           0.25f, 0.5f,                   // age range
+                           cyclone::Vector3(-20, 5, -5),  // min velocity
+                           cyclone::Vector3(20, 5, 5),    // max velocity
+                           0.2                            // damping
     );
 
     rules[4].init(1);
     rules[4].setParameters(5,                             // type
-        0.5f, 1.0f,                    // age range
-        cyclone::Vector3(-20, 2, -5),  // min velocity
-        cyclone::Vector3(20, 18, 5),   // max velocity
-        0.01                           // damping
+                           0.5f, 1.0f,                    // age range
+                           cyclone::Vector3(-20, 2, -5),  // min velocity
+                           cyclone::Vector3(20, 18, 5),   // max velocity
+                           0.01                           // damping
     );
     rules[4].payloads[0].set(3, 5);
 
     rules[5].init(0);
     rules[5].setParameters(6,                            // type
-        3, 5,                         // age range
-        cyclone::Vector3(-5, 5, -5),  // min velocity
-        cyclone::Vector3(5, 10, 5),   // max velocity
-        0.95                          // damping
+                           3, 5,                         // age range
+                           cyclone::Vector3(-5, 5, -5),  // min velocity
+                           cyclone::Vector3(5, 10, 5),   // max velocity
+                           0.95                          // damping
     );
 
     rules[6].init(1);
     rules[6].setParameters(7,                             // type
-        4, 5,                          // age range
-        cyclone::Vector3(-5, 50, -5),  // min velocity
-        cyclone::Vector3(5, 60, 5),    // max velocity
-        0.01                           // damping
+                           4, 5,                          // age range
+                           cyclone::Vector3(-5, 50, -5),  // min velocity
+                           cyclone::Vector3(5, 60, 5),    // max velocity
+                           0.01                           // damping
     );
     rules[6].payloads[0].set(8, 10);
 
     rules[7].init(0);
     rules[7].setParameters(8,                             // type
-        0.25f, 0.5f,                   // age range
-        cyclone::Vector3(-1, -1, -1),  // min velocity
-        cyclone::Vector3(1, 1, 1),     // max velocity
-        0.01                           // damping
+                           0.25f, 0.5f,                   // age range
+                           cyclone::Vector3(-1, -1, -1),  // min velocity
+                           cyclone::Vector3(1, 1, 1),     // max velocity
+                           0.01                           // damping
     );
 
     rules[8].init(0);
     rules[8].setParameters(9,                              // type
-        3, 5,                           // age range
-        cyclone::Vector3(-15, 10, -5),  // min velocity
-        cyclone::Vector3(15, 15, 5),    // max velocity
-        0.95                            // damping
+                           3, 5,                           // age range
+                           cyclone::Vector3(-15, 10, -5),  // min velocity
+                           cyclone::Vector3(15, 15, 5),    // max velocity
+                           0.95                            // damping
     );
     // > FireworkRuleDef
     // ... and so on for other firework types ...
@@ -382,33 +385,33 @@ void FireworksDemo::display() {
         // Check if we need to process this firework.
         if (firework->type > 0) {
             switch (firework->type) {
-            case 1:
-                glColor3f(1, 0, 0);
-                break;
-            case 2:
-                glColor3f(1, 0.5f, 0);
-                break;
-            case 3:
-                glColor3f(1, 1, 0);
-                break;
-            case 4:
-                glColor3f(0, 1, 0);
-                break;
-            case 5:
-                glColor3f(0, 1, 1);
-                break;
-            case 6:
-                glColor3f(0.4f, 0.4f, 1);
-                break;
-            case 7:
-                glColor3f(1, 0, 1);
-                break;
-            case 8:
-                glColor3f(1, 1, 1);
-                break;
-            case 9:
-                glColor3f(1, 0.5f, 0.5f);
-                break;
+                case 1:
+                    glColor3f(1, 0, 0);
+                    break;
+                case 2:
+                    glColor3f(1, 0.5f, 0);
+                    break;
+                case 3:
+                    glColor3f(1, 1, 0);
+                    break;
+                case 4:
+                    glColor3f(0, 1, 0);
+                    break;
+                case 5:
+                    glColor3f(0, 1, 1);
+                    break;
+                case 6:
+                    glColor3f(0.4f, 0.4f, 1);
+                    break;
+                case 7:
+                    glColor3f(1, 0, 1);
+                    break;
+                case 8:
+                    glColor3f(1, 1, 1);
+                    break;
+                case 9:
+                    glColor3f(1, 0.5f, 0.5f);
+                    break;
             };
 
             cyclone::Vector3 pos = firework->getPosition();
@@ -429,33 +432,33 @@ void FireworksDemo::display() {
 
 void FireworksDemo::key(unsigned char key) {
     switch (key) {
-    case '1':
-        create(1, 1, NULL);
-        break;
-    case '2':
-        create(2, 1, NULL);
-        break;
-    case '3':
-        create(3, 1, NULL);
-        break;
-    case '4':
-        create(4, 1, NULL);
-        break;
-    case '5':
-        create(5, 1, NULL);
-        break;
-    case '6':
-        create(6, 1, NULL);
-        break;
-    case '7':
-        create(7, 1, NULL);
-        break;
-    case '8':
-        create(8, 1, NULL);
-        break;
-    case '9':
-        create(9, 1, NULL);
-        break;
+        case '1':
+            create(1, 1, NULL);
+            break;
+        case '2':
+            create(2, 1, NULL);
+            break;
+        case '3':
+            create(3, 1, NULL);
+            break;
+        case '4':
+            create(4, 1, NULL);
+            break;
+        case '5':
+            create(5, 1, NULL);
+            break;
+        case '6':
+            create(6, 1, NULL);
+            break;
+        case '7':
+            create(7, 1, NULL);
+            break;
+        case '8':
+            create(8, 1, NULL);
+            break;
+        case '9':
+            create(9, 1, NULL);
+            break;
     }
 }
 

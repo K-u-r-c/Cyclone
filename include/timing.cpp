@@ -1,8 +1,8 @@
 #include "timing.h"
 
 // Includes the high performance timer (c. 4ms).
-#include <chrono>
 #ifdef __aarch64__
+#include <chrono>
 #else
 #include <windows.h>
 #endif
@@ -15,7 +15,7 @@ static double qpcFrequency;
 unsigned systemTime() {
 #ifdef __aarch64__
     // Don't know how to do the same for this architecture
-    return (unsigned)(std::chrono::high_resolution::clock::now().time_since_epoch().count() * qpcFrequency);
+    return (unsigned)(std::chrono::high_resolution_clock::now().time_since_epoch().count() * qpcFrequency);
 #else
     static long long qpcMillisPerTick;
     if (qpcFlag) {
@@ -54,7 +54,7 @@ void initTime() {
 
     // Check if we have access to the performance counter at this resolution.
 
-    if (qpcFlag) qpcFrequency = 0.0001;//1000.0 / time;
+    if (qpcFlag) qpcFrequency = 0.0001;  // 1000.0 / time;
 #endif
 }
 
