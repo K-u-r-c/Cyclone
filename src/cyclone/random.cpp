@@ -27,6 +27,7 @@ void Random::seed(unsigned s) {
     p2 = 10;
 }
 
+#ifdef __APPLE__
 static inline uint32_t rotl32(uint32_t n, unsigned int c) {
     const unsigned int mask = (CHAR_BIT * sizeof(n) - 1);  // assumes width is a power of 2.
 
@@ -34,6 +35,9 @@ static inline uint32_t rotl32(uint32_t n, unsigned int c) {
     c &= mask;
     return (n << c) | (n >> ((-c) & mask));
 }
+#else
+#define rotl32 _lrotl
+#endif
 
 unsigned Random::randomBits() {
     unsigned result;
